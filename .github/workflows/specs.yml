@@ -12,6 +12,10 @@ jobs:
       matrix:
         os:
           - ubuntu-18.04
+    
+    env:
+      RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
     steps:
       - name: Cache multiple paths
         uses: actions/cache@v2
@@ -31,6 +35,8 @@ jobs:
       - run: npm install -g yarn@1.22.4
       - run: bundle install
       - run: yarn install
+      - run: cp actionmap/config/credentials.yml.enc config/credentials.yml.enc
+      - run: echo $RAILS_MASTER_KEY | EDITOR="cat" bundle exec rails credentials:edit
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:test:prepare
       - run: bundle exec rspec
