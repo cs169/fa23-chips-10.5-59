@@ -20,8 +20,7 @@ class Representative < ApplicationRecord
       if existing_rep
         reps.push(existing_rep)
       else
-        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp, 
-            address: official.address, party: official.party , photo: official.photoUrl})
+        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp})
         reps.push(rep)
       end
     end
