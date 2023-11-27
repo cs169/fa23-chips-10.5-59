@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'google_civic_api'
 class RepresentativesController < ApplicationController
   def index
     @representatives = Representative.all
