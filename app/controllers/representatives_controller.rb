@@ -17,11 +17,27 @@ class RepresentativesController < ApplicationController
       rep.address = rep_info.officials['address']
       rep.political_party = rep_info.officials['party']
       rep.photo = rep_info.officials['photoUrl']
-
       rep.save
 
+      ##handling api errors##
+      rescue Google::Apis::CivicinfoV2::Error => api_error
+        handle_api_errors(api_error, rep)
+      #other errors
+      rescue StandardError => error
+        Rails.logger.error("Unexpected error for #{rep.name}: #{error.message}")
+      end
+    end
+  end
 
-      
-
+  def handle_api_errors(api_error, representative)
+    status_code = api_error.status_code
+    case status_code
+    when 403
+      Rails.logger.error("Cannot provide access to following action.")
+    when 404
+      Rails.logger.error("Representative not found!")
+    else #any other errors
+      Rails.logger.error("API error occured! Status code #{status_code}")
+    end
   end
 end
