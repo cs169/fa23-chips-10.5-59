@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Representative < ApplicationRecord
   has_many :news_items, dependent: :delete_all
 
@@ -11,17 +9,21 @@ class Representative < ApplicationRecord
       title_temp = ''
 
       rep_info.offices.each do |office|
-        if office.official_indices.include? index
-          title_temp = office.name
-          ocdid_temp = office.division_id
+        if office['official_indices'].include? index
+          title_temp = office['name']
+          ocdid_temp = office['division_id']
         end
       end
+        
+      existing_rep = Representative.find_by(ocdid: ocdid_temp, title: title_temp)
 
-      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-          title: title_temp })
-      reps.push(rep)
+      if existing_rep
+        reps.push(existing_rep)
+      else
+        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp })
+        reps.push(rep)
+      end
     end
-
     reps
   end
 end
