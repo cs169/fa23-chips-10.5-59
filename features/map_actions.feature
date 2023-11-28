@@ -7,4 +7,4 @@ Feature: Map Actions
   Scenario: Visiting a county map page
     Given I am on the "CA" state page
     When I click on Counties in California
-    Then I should see "Alameda County"
+    Then I should see "Alameda County" 
