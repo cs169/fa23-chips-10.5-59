@@ -11,7 +11,7 @@ When(/^I visit their representative profile page/) do
 end
 
 
-Then(/^I should see the representative's name, address, political party, and photo/)
+Then(/^I should see the representative's name, address, political party, and photo/) do
   expect(page).to have_content(Representative.first.name)
   expect(page).to have_content(Representative.first.address)
   expect(page).to have_content(Representative.first.political_party)
