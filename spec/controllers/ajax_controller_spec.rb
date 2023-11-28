@@ -3,7 +3,8 @@ require 'rails_helper'
 RSpec.describe AjaxController, type: :controller do
   describe 'GET #counties' do
     let(:state) do
-      State.create(name: 'Example State', symbol: 'example_state')
+      # Create a state directly using ActiveRecord with a fips_code
+      State.create(name: 'Example State', symbol: 'example_state', fips_code: '12345')
     end
     let(:state_symbol) { state.symbol }
 
