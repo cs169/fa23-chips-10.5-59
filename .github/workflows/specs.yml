@@ -35,8 +35,11 @@ jobs:
       - run: npm install -g yarn@1.19.1
       - run: bundle install
       - run: yarn install
-      - run: cp actionmap/config/credentials.yml.enc config/credentials.yml.enc
-      - run: echo $RAILS_MASTER_KEY | EDITOR="cat" bundle exec rails credentials:edit
+      - name: Decrypt credentials
+        run: |
+          echo $RAILS_MASTER_KEY > config/master.key
+          bundle exec rails credentials:edit
+          rm config/master.key
       - run: bundle exec rake db:setup
       - run: bundle exec rake db:test:prepare
       - run: bundle exec rspec
