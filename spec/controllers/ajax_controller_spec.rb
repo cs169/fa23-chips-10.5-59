@@ -2,12 +2,10 @@ require 'rails_helper'
 
 RSpec.describe AjaxController, type: :controller do
   describe 'GET #counties' do
-    let(:state) { 
-      create(:state) 
-    }
-    let(:state_symbol) { 
-      state.symbol 
-    }
+    let(:state) do
+      State.create(name: 'Example State', symbol: 'example_state')
+    end
+    let(:state_symbol) { state.symbol }
 
     it 'returns JSON with state counties' do
       get :counties, params: { state_symbol: state_symbol }, format: :json
