@@ -1,12 +1,11 @@
 Given(/^there is a representative named {string}/) do |name|
   #create a nonexistent rep
-  Representative.create!(name: name, ocdid: 'fake_ocdid', title: 'fake_title',
-  address: 'fake_address', party: 'fake_party', photo: 'fake_photo_url')
+  Representative.create!(name: name, ocdid: 'fake_ocdid', title: 'fake_title')
 end
 
 
 When(/^I visit their representative profile page/) do
-  #visit the rep profile page
+  #visit the rep profile page, get first representative
   visit representative_path(Representative.first)
 
 end
