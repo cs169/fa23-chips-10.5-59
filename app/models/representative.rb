@@ -4,14 +4,14 @@ class Representative < ApplicationRecord
   def self.civic_api_to_representative_params(rep_info)
     reps = []
 
-    rep_info.officials.each_with_index do |official, index|
+    rep_info["officials"].each_with_index do |official, index|
       ocdid_temp = ''
       title_temp = ''
 
-      rep_info.offices.each do |office|
-        if office.official_indices.include? index
-          title_temp = office.name
-          ocdid_temp = office.division_id
+      rep_info["offices"].each do |office|
+        if office["officialIndices"].include? index
+          title_temp = office["name"]
+          ocdid_temp = office["divisionId"]
         end
       end
 
