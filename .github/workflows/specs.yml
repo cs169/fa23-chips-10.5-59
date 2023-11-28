@@ -16,14 +16,13 @@ jobs:
           - ubuntu-22.04
 
     steps:
-      -shell: bash
       - name: Cache multiple paths
         uses: actions/cache@v2
         with:
           path: |-
             node_modules
             vendor/bundle
-          key: '${{ runner.os }}-${{ hashFiles(''**/Gemfile.lock') }}'
+          key: '${{ runner.os }}-${{ hashFiles('TODO') }}'
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
