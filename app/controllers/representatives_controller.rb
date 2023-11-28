@@ -13,12 +13,17 @@ class RepresentativesController < ApplicationController
       service.key = Rails.application.credentials[:GOOGLE_API_KEY]
       rep_info = service.representative_info_by_address(address: params[:address])
 
-      ### get info from representativeInfoByAddress from the officials section
-      rep.address = rep_info.officials['address']
-      rep.political_party = rep_info.officials['party']
-      rep.photo = rep_info.officials['photoUrl']
-      rep.save
-
+      if rep_info&.officials&.any? #make sure its not nil
+        ### get info from representativeInfoByAddress from the officials section
+        curr_rep = rep_info.officials.find { |official| official["name"] == rep.name }
+        if curr_rep  #make sure we find it
+          rep.address = curr_rep['address']
+          rep.political_party = curr_rep['party']
+          rep.photo = curr_rep['photoUrl']
+          rep.save
+        end
+      end
+    
       ##handling api errors##
       rescue Google::Apis::CivicinfoV2::Error => api_error
         handle_api_errors(api_error, rep)
