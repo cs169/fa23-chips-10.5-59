@@ -14,9 +14,7 @@ class Representative < ApplicationRecord
           ocdid_temp = office['division_id']
         end
       end
-
-      puts "Creating representative with name: #{official.name}, ocdid: #{ocdid_temp}, title: #{title_temp}"
-
+      
       existing_rep = Representative.find_by(ocdid: ocdid_temp, title: title_temp)
 
       if existing_rep
