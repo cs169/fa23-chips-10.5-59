@@ -20,7 +20,7 @@ jobs:
         env:
           RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
         run: touch master.key && echo "$RAILS_MASTER_KEY" > master.key
-  echo ""     - name: Cache multiple paths
+      - name: Cache multiple paths
         uses: actions/cache@v2
         with:
           path: |-
