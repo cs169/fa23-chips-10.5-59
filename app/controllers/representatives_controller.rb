@@ -30,6 +30,7 @@ class RepresentativesController < ApplicationController
     end
   end
 
+  ##checks for diff api errors
   def handle_api_errors(api_error, representative)
     status_code = api_error.status_code
     case status_code
