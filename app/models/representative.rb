@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Representative < ApplicationRecord
   has_many :news_items, dependent: :delete_all
 
@@ -17,11 +15,15 @@ class Representative < ApplicationRecord
         end
       end
 
-      rep = Representative.create!({ name: official.name, ocdid: ocdid_temp,
-          title: title_temp })
-      reps.push(rep)
-    end
+      existing_rep = Representative.find_by(ocdid: ocdid_temp, title: title_temp)
 
+      if existing_rep
+        reps.push(existing_rep)
+      else
+        rep = Representative.create!({ name: official.name, ocdid: ocdid_temp, title: title_temp})
+        reps.push(rep)
+      end
+    end
     reps
   end
 end
