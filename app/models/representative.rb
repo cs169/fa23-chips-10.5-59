@@ -16,7 +16,7 @@ class Representative < ApplicationRecord
       end
 
       if address.nil?
-        address = "address is Unavalible"
+        address = "Address is unavalible."
       else
         address = address[0].line1 + "\n" + address[0].city + "\n" +address[0].zip
         
@@ -33,6 +33,7 @@ class Representative < ApplicationRecord
          address: address, political_party: party, photo: pic})
         
       reps.push(rep)
+
     end
     reps
   end
