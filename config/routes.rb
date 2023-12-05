@@ -2,6 +2,8 @@
 
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  get 'campaign_finances/index'
+  get 'campaign_finances/show'
     get '/login' => 'login#login', :as => :login
     get '/login/google', to: redirect('auth/google_oauth2'), as: :google_login
     get '/login/github', to: redirect('auth/github'), as: :github_login
@@ -40,4 +42,8 @@ Rails.application.routes.draw do
                                                                       via: [:delete]
     end
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
+
+
+    #ROUTES FOR CampaignFinance
+    resources :campaign_finances, only: [:index, :show] 
 end
