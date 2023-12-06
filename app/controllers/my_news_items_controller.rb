@@ -36,6 +36,17 @@ class MyNewsItemsController < SessionController
                 notice: 'News was successfully destroyed.'
   end
 
+  def search_top_five
+    @issue = params[:issue] #get the issue from parameters
+    service = Google::Apis::CivicinfoV2::CivicInfoService.new
+    service.key = Rails.application.credentials[:NEWS_API_KEY]  #In credentials
+    ]
+
+  end
+
+  def
+
+
   private
 
   def set_representative

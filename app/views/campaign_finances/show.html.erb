@@ -1,0 +1,8 @@
+<h1>Campaign Finances</h1>
+
+<% @campaign_finances.each do |campaign_finance| %>
+  <div>
+    <p>Candidate: <%= campaign_finance.candidate_name %></p>
+    <p>Running Cycle: <%= campaign_finance.cycle %></p>
+  </div>
+<% end %>
