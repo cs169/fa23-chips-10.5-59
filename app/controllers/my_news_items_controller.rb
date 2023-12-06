@@ -1,8 +1,10 @@
 # frozen_string_literal: true
+#require 'news-api'
 
 class MyNewsItemsController < SessionController
   before_action :set_representative
   before_action :set_representatives_list
+  before_action :set_issues_list
   before_action :set_news_item, only: %i[edit update destroy]
 
   def new
@@ -38,14 +40,13 @@ class MyNewsItemsController < SessionController
 
   def search_top_five
     @issue = params[:issue] #get the issue from parameters
-    service = Google::Apis::CivicinfoV2::CivicInfoService.new
-    service.key = Rails.application.credentials[:NEWS_API_KEY]  #In credentials
-    ]
-
+    #set up news API
+    news_api = News.new(Rails.application.credentials[:NEWS_API_KEY])  #In credentials
+    #using everything endpoint cause ed post said other end point is unreliable
+      #q => keywords/phrases to search URL CODED
+    @top_five = news_api.everything(q: "#{@issue} AND #{@representative}",language: en,
+                   sortBy: popularity, pageSize: 5, page: 1)
   end
-
-  def
-
 
   private
 
@@ -57,6 +58,12 @@ class MyNewsItemsController < SessionController
 
   def set_representatives_list
     @representatives_list = Representative.all.map { |r| [r.name, r.id] }
+  end
+
+  def set_issues_list
+    @issues_list = ["Free Speech", "Immigration", "Terrorism", "Social Security and Medicare", "Abortion",
+    "Student Loans", "Gun Control", "Unemployment", "Climate Change", "Homelessness", "Racism", "Tax Reform",
+    "Net Neutrality", "Religious Freedom", "Border Security", "Minimum Wage", "Equal Pay"]
   end
 
   def set_news_item

@@ -15,8 +15,6 @@
     .col-sm-2
       = f.label :issue, 'Select Issue:', class: 'col-form-label'
     .col-sm-10
-      = f.select :issue, ["Free Speech", "Immigration", "Terrorism", "Social Security and Medicare", "Abortion",
-       "Student Loans", "Gun Control", "Unemployment", "Climate Change", "Homelessness", "Racism", "Tax Reform",
-       "Net Neutrality", "Religious Freedom", "Border Security", "Minimum Wage", "Equal Pay"], { prompt: 'Select Issue' }, class: 'form-control'
+      = f.select :issue, @issues_list, {include_blank: true }, class: 'form-control'
   .actions
     = f.submit 'Search', class: 'btn btn-primary'
