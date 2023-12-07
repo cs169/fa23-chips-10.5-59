@@ -30,6 +30,14 @@ Rails.application.routes.draw do
     resources :representatives, only: [:index]
     resources :representatives do
         resources :news_items, only: %i[index show]
+        #########
+        post '/representatives/:representative_id/my_news_item/search' => 'my_news_items#search_top_five',
+            :as                                                    => :search_news
+        ##add a route to create page?
+        post '/representatives/:representative_id/my_news_item/create' => 'my_news_items#create_article_from_api',
+            :as                                                    => :create_article_from_api
+############
+
         get '/representatives/:representative_id/my_news_item/new' => 'my_news_items#new',
             :as                                                    => :new_my_news_item
         match '/representatives/:representative_id/my_news_item/new', to:  'my_news_items#create',

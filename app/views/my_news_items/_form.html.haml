@@ -16,5 +16,6 @@
       = f.label :issue, 'Select Issue:', class: 'col-form-label'
     .col-sm-10
       = f.select :issue, @issues_list, {include_blank: true }, class: 'form-control'
+      
   .actions
     = f.submit 'Search', class: 'btn btn-primary'

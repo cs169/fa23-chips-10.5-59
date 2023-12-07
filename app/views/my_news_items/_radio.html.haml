@@ -1,0 +1,8 @@
+= form_tag form_url, method: form_method do
+  - @top_five.each do |article|
+    .radio-option
+      = radio_button_tag "selected_article", article
+      = label_tag "selected_article_#{article.object_id}", article["title"]
+
+
+  = submit_tag "Search"
