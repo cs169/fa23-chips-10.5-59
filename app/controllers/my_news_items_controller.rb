@@ -40,29 +40,31 @@ class MyNewsItemsController < SessionController
   end
 
   def search_top_five 
-    puts "Params: #{params.inspect}"
-
+    p "ARTICLEEE:  #{params}"
     api_key = Rails.application.credentials[:NEWS_API_KEY]
     news_api = News.new(api_key)  #In credentials
     #using everything endpoint cause ed post said other end point is unreliable
     #q => keywords/phrases to search URL CODED
+
    
     @issue = news_item_params[:issue]
     @selected_rep = news_item_params[:representative_id]
-    p "@top_five: #{@selected_rep}"
     response = HTTParty.get("https://newsapi.org/v2/everything",
       query: { q: "#{@issue} #{@selected_rep}",
         language: 'en', sortBy: 'popularity', pageSize: 5, page: 1 }, 
         headers: {'Authorization' => "Bearer #{api_key}"})
-    data = JSON.parse(response.body)   
+    data = JSON.parse(response.body)
     @top_five = data['articles']
-    p "end: #{@issue}"
-
   end
 
+
   def create_article_from_api
-
-
+    p "ARTICLEEE:     "
+    sel_article = params[:selected_article]
+    parsed = eval(sel_article)
+    @news_item = NewsItem.new(title: parsed['title'], description: parsed['description'],
+     link: parsed['url'], representative_id: '4', issue: params[:selected_issue])
+    @news_item.save
   end
 
   private

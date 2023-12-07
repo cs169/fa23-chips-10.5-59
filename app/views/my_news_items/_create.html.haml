@@ -1,0 +1,32 @@
+= form_for news_item, url: form_url, html: { method: form_method } do |f|
+  - if news_item.errors.any?
+    .alert.alert-danger
+      %h2
+        "#{pluralize(news_item.errors.count, 'error')} prohibited this news from being saved:"
+      %ul
+        - news_item.errors.full_messages.each do |message|
+          %li= message
+
+  .selected-info
+    %p
+      %strong Representative:
+      = link_to Representative.find_by(id: params[:selected_rep]).name, Representative.find_by(id: params[:selected_rep])
+    %p
+      %strong Issue:
+      = news_item.issue
+
+    %p
+      %strong Title: 
+      = news_item.title
+
+    %p 
+      %strong Link: 
+      = link_to news_item.link, news_item.link
+
+    %p 
+      %strong Description: 
+      = news_item.description
+
+    .actions
+    = submit_tag "Save", class: 'btn btn-primary'
+
