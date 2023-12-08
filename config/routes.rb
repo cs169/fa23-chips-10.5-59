@@ -2,6 +2,8 @@
 
 # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 Rails.application.routes.draw do
+  get 'campaign_finances/index'
+  get 'campaign_finances/show'
     get '/login' => 'login#login', :as => :login
     get '/login/google', to: redirect('auth/google_oauth2'), as: :google_login
     get '/login/github', to: redirect('auth/github'), as: :github_login
@@ -28,6 +30,14 @@ Rails.application.routes.draw do
     resources :representatives, only: [:index]
     resources :representatives do
         resources :news_items, only: %i[index show]
+        #########
+        post '/representatives/:representative_id/my_news_item/search' => 'my_news_items#search_top_five',
+            :as                                                    => :search_news
+        ##add a route to create page?
+        post '/representatives/:representative_id/my_news_item/create' => 'my_news_items#create_article_from_api',
+            :as                                                    => :create_article_from_api
+############
+
         get '/representatives/:representative_id/my_news_item/new' => 'my_news_items#new',
             :as                                                    => :new_my_news_item
         match '/representatives/:representative_id/my_news_item/new', to:  'my_news_items#create',
@@ -40,4 +50,8 @@ Rails.application.routes.draw do
                                                                       via: [:delete]
     end
     get '/search/(:address)' => 'search#search', :as => 'search_representatives'
+
+
+    #ROUTES FOR CampaignFinance
+    resources :campaign_finances, only: [:index, :show] 
 end

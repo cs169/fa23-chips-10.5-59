@@ -1,0 +1,18 @@
+= form_tag form_url, method: form_method do
+  - news_item.each do |article|
+    .radio-option
+      = radio_button_tag "selected_article", article
+      = label_tag "selected_article_#{article.object_id}" do
+        %div
+          %strong Title:
+          %span= article["title"]
+
+        %div
+          %strong Link: 
+          %span= link_to article["url"], article["url"]
+
+  = hidden_field_tag :selected_issue, params.dig('news_item', 'issue')
+  = hidden_field_tag :selected_rep, params.dig('news_item', 'rep')
+
+  .actions
+    = submit_tag "Search", class: 'btn btn-primary'

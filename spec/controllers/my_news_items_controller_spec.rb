@@ -43,6 +43,7 @@ RSpec.describe MyNewsItemsController, type: :controller do
         #expect(response).to render_template(:new)
         #expect(assigns(:news_item)).to be_a_new(NewsItem)
         #expect(flash[:error]).to eq('An error occurred when creating the news item.')
+
       end
     end
   end

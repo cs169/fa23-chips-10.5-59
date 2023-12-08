@@ -9,6 +9,8 @@
                             %th Name
                             %th Office
                             %th Links
+                            %th Profile
+
                     %tbody
                         - @representatives.each_with_index do |rep, _index|
                             %tr
@@ -18,5 +20,6 @@
                                     = link_to representative_news_items_path(rep.id), class: 'btn btn-primary' do
                                         %i.fas.fa-newspaper
                                         News Articles
-                                %td = link_to rep.name, representative_path(rep)
-                                %td = "Political Party:  #{rep.political_party}"
+                                %td 
+                                    =link_to representative_path(rep), class: 'btn btn-info' do
+                                        Profile

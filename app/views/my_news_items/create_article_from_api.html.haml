@@ -1,9 +1,10 @@
 .row.mt-2
     .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        %h1.text-center Search News Article by Representative and Isssue
+        %h1.text-center Create Article
+
 
     .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        = render 'form', news_item: @news_item,
+        = render 'create', news_item: @news_item,
         form_url: representative_search_news_path(@representative),
         form_method: :post,
         representatives_list: @representatives_list

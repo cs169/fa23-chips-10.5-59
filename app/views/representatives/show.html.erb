@@ -1,4 +1,7 @@
+
 <h1><%= @representative.name %></h1>
+<p>Office: <%= @representative.title %></p>
+<p>OCD ID: <%= @representative.ocdid %></p>
 <p>Contact Address: <%= @representative.address %></p>
 <p>Political Party: <%= @representative.political_party %></p>
-<%= image_tag @representative.photo, alt: "Representative Photo" %>
+<p>Image URL: <%= @representative.photo %></p>

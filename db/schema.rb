@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_11_27_020226) do
+ActiveRecord::Schema.define(version: 2023_12_05_065252) do
+
+  create_table "campaign_finances", force: :cascade do |t|
+    t.string "canidate"
+    t.integer "representative_id", null: false
+    t.integer "cycle"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["representative_id"], name: "index_campaign_finances_on_representative_id"
+  end
 
   create_table "counties", force: :cascade do |t|
     t.string "name", null: false
@@ -40,6 +49,7 @@ ActiveRecord::Schema.define(version: 2023_11_27_020226) do
     t.integer "representative_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "issue"
     t.index ["representative_id"], name: "index_news_items_on_representative_id"
   end
 

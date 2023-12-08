@@ -30,7 +30,6 @@ RSpec.describe MyEventsController, type: :controller do
 
       it 'renders new template with errors' do
         post :create, params: { event: invalid_params }
-
         #expect(response).to render_template(:new)
         #expect(assigns(:event)).to be_a_new(Event)
         #expect(flash[:notice]).to be_nil
