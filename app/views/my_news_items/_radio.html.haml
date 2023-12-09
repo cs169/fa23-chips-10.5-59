@@ -9,7 +9,7 @@
 
         %div
           %strong Link: 
-          %span= link_to article["url"], article["url"]
+          %span= link_to article["url"], article["url"], target: '_blank'
 
   = hidden_field_tag :selected_issue, params.dig('news_item', 'issue')
   = hidden_field_tag :selected_rep, params.dig('news_item', 'representative_id')

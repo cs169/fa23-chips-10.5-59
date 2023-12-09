@@ -11,9 +11,7 @@ class Representative < ApplicationRecord
       party = official.party
       pic = official.photo_url
 
-      if pic.nil?
-        pic = 'Photo Unavalible'
-      end
+
 
       if address.nil?
         address = "Address is unavalible."

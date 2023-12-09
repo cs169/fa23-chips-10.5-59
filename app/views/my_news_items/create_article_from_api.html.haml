@@ -13,7 +13,7 @@
   .selected-info
     %p 
       %strong Representative:
-      = link_to Representative.find_by(id: params[:selected_rep]).name, Representative.find_by(id: params[:selected_rep])
+      = link_to Representative.find_by(id: params[:selected_rep]).name, Representative.find_by(id: params[:selected_rep]) 
     %p
       %strong Issue:
       = @news_item.issue
