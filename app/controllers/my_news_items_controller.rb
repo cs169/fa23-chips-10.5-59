@@ -34,6 +34,7 @@ class MyNewsItemsController < SessionController
   end
 
   def destroy
+    p "I AMINSIDEURWALLSBEN   "
     @news_item.destroy
     redirect_to representative_news_items_path(@representative),
                 notice: 'News was successfully destroyed.'

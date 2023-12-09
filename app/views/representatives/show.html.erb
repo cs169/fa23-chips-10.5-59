@@ -1,6 +1,18 @@
-<h1><%= @representative.name %></h1>
-<p>Office: <%= @representative.title %></p>
-<p>OCD ID: <%= @representative.ocdid %></p>
-<p>Contact Address: <%= @representative.address %></p>
-<p>Political Party: <%= @representative.political_party %></p>
-<p>Photo: <img src="<%= @representative.photo %>" alt="Representative Photo"></p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= @representative.name %> Details</title>
+</head>
+<body style="display: flex; justify-content: center; height: 100vh; margin: 0;">
+  <div style="text-align: center;">
+    <h1><%= @representative.name %></h1>
+    <p><strong>Office: </strong> <%= @representative.title %></p>
+    <p><strong>OCD ID: </strong> <%= @representative.ocdid %></p>
+    <p><strong>Contact Address: </strong> <%= @representative.address %></p>
+    <p><strong>Political Party: </strong> <%= @representative.political_party %></p>
+    <p><strong>Photo: </strong><img src="<%= @representative.photo %>" alt="Representative Photo"></p>
+  </div>
+</body>
+</html>
