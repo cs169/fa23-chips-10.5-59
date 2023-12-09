@@ -13,7 +13,7 @@ class NewsItemsController < ApplicationController
   private
 
   def set_representative
-    @representative = Representative.find(
+    @representative = Representative.find_by(
       params[:representative_id]
     )
   end
