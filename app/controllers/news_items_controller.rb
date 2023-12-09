@@ -13,11 +13,14 @@ class NewsItemsController < ApplicationController
   private
 
   def set_representative
-    @representative = Representative.find_by(
-      params[:representative_id]
-    )
+    @representative = Representative.find_by(id: params[:representative_id])
+    unless @representative
+      # Handle the case when the representative with the given ID is not found
+      render status: :not_found, json: { error: 'Representative not found' }
+    end
   end
 
+  
   def set_news_item
     @news_item = NewsItem.find(params[:id])
   end

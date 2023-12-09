@@ -71,7 +71,7 @@ class MyNewsItemsController < SessionController
   private
 
   def set_representative
-    @representative = Representative.find_by(params[:representative_id])
+    @representative = Representative.find(params[:representative_id])
 
   end
 
