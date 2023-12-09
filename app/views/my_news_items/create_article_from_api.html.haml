@@ -1,17 +1,41 @@
 .row.mt-2
-    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        %h1.text-center Create Article
+  .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+    %h1.text-center Create Article
 
+    - if @news_item.errors.any?
+      .alert.alert-danger
+        %h2
+          "#{pluralize(news_item.errors.count, 'error')} prohibited this news from being saved:"
+        %ul
+          - @news_item.errors.full_messages.each do |message|
+            %li= message
 
-    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        = render 'create', news_item: @news_item,
-        form_url: representative_search_news_path(@representative),
-        form_method: :post,
-        representatives_list: @representatives_list
+  .selected-info
+    %p 
+      %strong Representative:
+      = link_to Representative.find_by(id: params[:selected_rep]).name, Representative.find_by(id: params[:selected_rep])
+    %p
+      %strong Issue:
+      = @news_item.issue
 
-    .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
-        .clearfix.mt-3
-            .float-right
-                = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
-                    View news articles
-                    %i.fas.fa-arrow-right
+    %p
+      %strong Title: 
+      = @news_item.title
+
+    %p 
+      %strong Link: 
+      = link_to @news_item.link, @news_item.link
+
+    %p 
+      %strong Description: 
+      = @news_item.description
+
+  .actions
+    = submit_tag "Save", class: 'btn btn-primary'
+
+  .col-12.col-md-6.offset-md-3.col-xl-4.offset-xl-4
+    .clearfix.mt-3
+      .float-right
+        = link_to representative_news_items_path(@representative), class: 'btn btn-info' do
+          View news articles
+          %i.fas.fa-arrow-right

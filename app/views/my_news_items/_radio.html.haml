@@ -12,7 +12,7 @@
           %span= link_to article["url"], article["url"]
 
   = hidden_field_tag :selected_issue, params.dig('news_item', 'issue')
-  = hidden_field_tag :selected_rep, params.dig('news_item', 'rep')
+  = hidden_field_tag :selected_rep, params.dig('news_item', 'representative_id')
 
   .actions
     = submit_tag "Search", class: 'btn btn-primary'
