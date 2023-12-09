@@ -45,7 +45,6 @@ class MyNewsItemsController < SessionController
     @issue = news_item_params[:issue]
     @selected_rep_id = news_item_params[:representative_id]
     @selected_rep = Representative.find(@selected_rep_id).name
-    p "ARTICLEEeeeeeeeeE:    #{@selected_rep} "
     response = HTTParty.get("https://newsapi.org/v2/everything",
       query: { q: "#{@issue} #{@selected_rep}",
         language: 'en', sortBy: 'popularity', pageSize: 5, page: 1 }, 
@@ -62,7 +61,7 @@ class MyNewsItemsController < SessionController
      link: parsed['url'], representative_id: id, issue: params[:selected_issue])
 
     if @news_item.save
-      redirect_to representative_news_item_path(@representative, @news_item),
+      redirect_to representative_news_item_path(Representative.find(params[:selected_rep]), @news_item),
                   notice: 'News item was successfully created.'
     else
       render :new, error: 'An error occurred when creating the news item.'
